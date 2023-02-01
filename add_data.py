@@ -1,5 +1,5 @@
 from app import db
-#from app import app
+from app import app
 from models import Song, Playlist, Item, User
 
 p1 = Playlist(id = 3456)
@@ -16,6 +16,9 @@ s2 = Song(id = 2, artist = "David Bowie", title = "Space Oddity", n = 0)
 s3 = Song(id = 3, artist = "Sting", title = "Walking on the Moon", n = 0)
 s4 = Song(id = 4, artist = "Nick Cave & The Bad Seeds", title = "Rings of Saturn", n = 0) 
 s5 = Song(id = 5, artist = "Babylon Zoo", title = "Spaceman", n = 0)
+
+
+# i have to add this "with" to be able to add the models in the database o the program will return a "Working outside of application context error"
 
 with app.app_context():
     db.session.add(p1)

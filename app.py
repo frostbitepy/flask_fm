@@ -1,8 +1,8 @@
 from flask import Flask, render_template
-#import SQLALchemy
 from flask_sqlalchemy import SQLAlchemy
 
-
+#the app works with "flask run", but doesn't run me with "py app.py".
+#don't know why, but i will leave it that way for the moment and find out later
 
 
 app = Flask(__name__)
