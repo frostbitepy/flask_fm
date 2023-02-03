@@ -39,7 +39,7 @@ def profiles():
 def profile(user_id):
    user = User.query.filter_by(id = user_id).first_or_404(description = "No such user found.")
    songs = Song.query.all()
-   my_playlist = None #change here to a database query
+   my_playlist = Playlist.query.get(user.playlist_id)
    return render_template('profile.html', user = user, songs = songs, my_playlist = my_playlist)
 
 #Adds new songs to a user's playlist from the song library
@@ -52,8 +52,11 @@ def add_item(user_id, song_id, playlist_id):
    if not exists(new_item, my_playlist.items):
       song = Song.query.get(song_id)
       #using db session add the new item
+      db.session.add(new_item)
       #increase the counter for the song associated with the new item
+      song.n = song.n + 1
       #commit the database changes here
+      db.session.commit()
    return redirect(url_for('profile', user_id = user_id))
 
 #Remove an item from a user's playlist
@@ -61,8 +64,11 @@ def add_item(user_id, song_id, playlist_id):
 @app.route('/remove_item/<int:user_id>/<int:item_id>')
 def remove_item(user_id, item_id):
    #from the Item model, fetch the item with primary key item_id to be deleted
+   item = Item.query.get(item_id)
    #using db.session delete the item
+   db.session.delete(item)
    #commit the deletion
+   db.session.commit()
    return redirect(url_for('profile', user_id = user_id))
    
 #Display the Dashboard page with a form for adding songs

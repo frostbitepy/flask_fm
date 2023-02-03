@@ -2,6 +2,9 @@ from app import db
 from app import app
 from models import Song, Playlist, Item, User
 
+
+#this file purpose is to initiate the database adding some models to work with
+
 p1 = Playlist(id = 3456)
 p2 = Playlist(id = 2342)
 p3 = Playlist(id = 4576)
@@ -18,7 +21,8 @@ s4 = Song(id = 4, artist = "Nick Cave & The Bad Seeds", title = "Rings of Saturn
 s5 = Song(id = 5, artist = "Babylon Zoo", title = "Spaceman", n = 0)
 
 
-# i have to add this "with" to be able to add the models in the database o the program will return a "Working outside of application context error"
+#i have to add this "with" to be able to add the models in the database or the program will return a "Working outside of application context error"
+#don't know exactly why yet, but i copy this solution from stackoverflow
 
 with app.app_context():
     db.session.add(p1)

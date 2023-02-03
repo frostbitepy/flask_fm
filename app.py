@@ -6,11 +6,17 @@ from flask_sqlalchemy import SQLAlchemy
 
 
 app = Flask(__name__)
+
+#the database works only if it is in the main folder; 
+#even if i change the sqlalchemy config to 'sqlite:////instance/song_library.db' 
+#the application doesn't recognize the database in the instance folder
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///song_library.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SECRET_KEY'] = 'you-will-never-guess'
-#create an SQLAlchemy object named `db` and bind it to your app
+
+#create an SQLAlchemy object named `db` and bind it to the app
 db = SQLAlchemy(app)
+
 #a simple initial greeting
 @app.route('/')
 @app.route('/index')
