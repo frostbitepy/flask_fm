@@ -85,6 +85,6 @@ def dashboard():
     db.session.commit()
   else:
         flash(form.errors)
-  unpopular_songs = []  #add the ordering query here
+  unpopular_songs = Song.query.order_by(Song.n)  #add the ordering query here
   songs = Song.query.all()
   return render_template('dashboard.html', songs = songs, unpopular_songs = unpopular_songs, form = form)

@@ -20,17 +20,22 @@ class Song(db.Model):
   def __repr__(self):
         return "{} by {}".format(self.title,self.artist)
 
+
     
 #create the Item model here + add a nice representation method
 class Item(db.Model):
   id = db.Column(db.Integer, primary_key = True)
   song_id = db.Column(db.Integer, db.ForeignKey('song.id'))
   playlist_id = db.Column(db.Integer, db.ForeignKey('playlist.id'))
+  #def __repr__(self):
+  #  return "{} song is in {}'s playlist".format(Song.query.get(song_id=self.song_id).title, User.query.get(playlist_id=self.playlist_id).username)
     
 #create the Playlist model here + add a nice representation method
 class Playlist(db.Model):
   id = db.Column(db.Integer, primary_key = True)
   items = db.relationship('Item', backref='playlist', lazy='dynamic')
+  #def __repr__(self):
+  #  return "A {}'s playlist".format(User.query.get(playlist_id=self.id).username)
 
 
 #adding this comment just to test a push from this cloned repository
